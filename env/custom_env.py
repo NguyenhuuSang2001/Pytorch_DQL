@@ -16,7 +16,7 @@ class IoTCommunicationEnv():
         self.num_channel = num_channel
 
         self.W_U = W_U
-        self.GAMMA = [4, 6, 8]
+        self.GAMMA = [0.0025118864, 0.0039810717, 0.0063095734]
         self.CHANNEL_GAIN = [0.1, 0.3, 0.5, 0.7, 0.9]
         self.d_k = 20
         self.noise_variance = 10**(-17) 
@@ -148,6 +148,8 @@ class IoTCommunicationEnv():
             
             data_rate = 1.0 * level_power / self.num_level_power * self.max_power * channel_gain * d_k**(-2)/ (interference + W_U * noise_variance)
             reward += W_U * np.log2(1 + data_rate)
+
+            reward /= 10**3
 
         return reward
 
